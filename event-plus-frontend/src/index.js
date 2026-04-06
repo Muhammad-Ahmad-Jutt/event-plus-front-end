@@ -2,7 +2,7 @@ import { createRoot } from 'react-dom/client'
 import React from 'react'
 import { BrowserRouter } from "react-router-dom"
 import { AuthProvider } from "./context/AuthContext"
-import App from "./App"
+import App from "./app"
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -12,4 +12,4 @@ createRoot(document.getElementById('root')).render(
 </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
-)
+);

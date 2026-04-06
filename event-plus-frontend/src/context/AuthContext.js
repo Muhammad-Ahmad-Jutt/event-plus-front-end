@@ -1,26 +1,52 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useEffect, useState } from "react";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true); 
 
-  const login = (userData, token) => {
-    localStorage.setItem("token", token);
-    setUser(userData);
+  useEffect(() => {
+    const savedToken = localStorage.getItem("access_token");
+    const savedUser = localStorage.getItem("user");
+
+    if (savedToken) setToken(savedToken);
+
+    if (savedUser) {
+      try {
+        setUser(JSON.parse(savedUser));
+      } catch (e) {
+        console.error("Invalid user JSON, clearing storage:", e);
+        localStorage.removeItem("user");
+        localStorage.removeItem("access_token");
+      }
+    }
+
+    setAuthLoading(false); 
+  }, []);
+
+  const login = (tokendata, userdata) => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("user");
+    //addin new data
+    setToken(tokendata);
+    setUser(userdata);
+    localStorage.setItem("access_token", tokendata);
+    localStorage.setItem("user", JSON.stringify(userdata));
+    console.log("Logging in with token:", tokendata, "and user:", userdata);
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
+    setToken(null);
     setUser(null);
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("user");
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ token, user, authLoading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
-
-// custom hook
-export const useAuth = () => useContext(AuthContext);

@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 export default function SignUp() {
   const [formData, setFormData] = useState({
     email: "",
@@ -9,6 +9,7 @@ export default function SignUp() {
     gender: "",
     dob: "",
   });
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     setFormData({
@@ -22,7 +23,7 @@ export default function SignUp() {
 
     try {
         // backend logic
-      const response = await fetch("http://localhost:5000/api/signup", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/users/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,9 +32,11 @@ export default function SignUp() {
       });
 
       const data = await response.json();
-      console.log("Response:", data);
 
       // TODO: handle success (redirect/login)
+      if (response.ok) {
+        navigate("/sign-in");
+      }
     } catch (error) {
       console.error("Error:", error);
     }
