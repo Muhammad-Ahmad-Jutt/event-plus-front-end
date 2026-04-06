@@ -1,9 +1,15 @@
 import { createRoot } from 'react-dom/client'
 import React from 'react'
-import Homepage from './Homepage'
-import "./index.css"
+import { BrowserRouter } from "react-router-dom"
+import { AuthProvider } from "./context/AuthContext"
+import App from "./app"
+
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Homepage />
+    <BrowserRouter>
+<AuthProvider>
+  <App />
+</AuthProvider>
+    </BrowserRouter>
   </React.StrictMode>
-)  
+);
