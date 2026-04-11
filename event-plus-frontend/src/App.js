@@ -7,6 +7,7 @@ import SignIn from "./pages/Signin";
 import SignUp from "./pages/Signup";
 import CreateEventForm from "./pages/CreateEvent";
 import Event from "./pages/Event";
+import UpdateEventForm from "./pages/UpdateEvent";
 export default function App() {
   return (
     <>
@@ -17,6 +18,7 @@ export default function App() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/create-event" element={<CreateEventForm />} />
       <Route path="/event/:id" element={<Event />} />
+      <Route path="/update-event/:id" element={<UpdateEventForm />} />
       <Route path="*" element={<Notfound />} />
     </Routes>
     <Footer />

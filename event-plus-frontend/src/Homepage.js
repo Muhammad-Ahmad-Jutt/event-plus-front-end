@@ -37,30 +37,6 @@ export default function Homepage() {
     }
   };
 
-  const deleteEvent = async (eventId) => {
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/api/events/${eventId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (response.ok) {
-        toast.success("Event deleted successfully");
-        fetchEventList(); // Refresh the list
-      } else {
-        toast.error("Failed to delete event");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      toast.error("Error deleting event");
-    }
-  };
-
   useEffect(() => {
     fetchEventList();
   }, [user, token, logout]);
@@ -93,8 +69,7 @@ export default function Homepage() {
                     </button>
                     <p>{event.description}</p>
                     <p>Date: {event.date}</p>
-                    <button onClick={() => navigate(`/update-event/${event.id}`)}>Update</button>
-                    <button onClick={() => deleteEvent(event.id)}>Delete</button>
+                    
                   </li>
                 ))}
               </ul>

@@ -1,15 +1,18 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 export default function EventDetails() {
   const { id } = useParams();
   const { token } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  // ✅ Fetch Event
   useEffect(() => {
     const fetchEvent = async () => {
       try {
@@ -32,7 +35,7 @@ export default function EventDetails() {
           throw new Error(data.message || "Failed to fetch event");
         }
 
-        setEvent(data.event); // ✅ FIX HERE
+        setEvent(data.event);
       } catch (err) {
         console.error(err);
         setError(err.message);
@@ -43,6 +46,32 @@ export default function EventDetails() {
 
     if (id && token) fetchEvent();
   }, [id, token]);
+
+  // ✅ DELETE FUNCTION (moved outside)
+  const deleteEvent = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/events/delete_event/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        toast.success("Event deleted successfully");
+        navigate("/"); // ✅ redirect instead of refetch
+      } else {
+        const data = await response.json();
+        toast.error(data.message || "Failed to delete event");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("Error deleting event");
+    }
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>❌ {error}</p>;
@@ -68,6 +97,14 @@ export default function EventDetails() {
       </p>
 
       <p>Participants: {event.no_of_participants_allowed}</p>
+
+      <button onClick={() => navigate(`/update-event/${event.id}`)}>
+        Update
+      </button>
+
+      <button onClick={() => deleteEvent()}>
+        Delete
+      </button>
     </div>
   );
 }
