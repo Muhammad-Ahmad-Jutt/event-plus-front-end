@@ -1,33 +1,83 @@
 import "./index.css";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
+import { toast } from "react-toastify";
+
 export default function Homepage() {
+  const { user, token, logout } = useContext(AuthContext);
+  const [events, setEvents] = useState([]);
   const navigate = useNavigate();
-  const { user, logout } = useContext(AuthContext);
-  console.log("Current User:", user);
-  const logout_user = () => {
-  logout();         
-    setTimeout(() => {
-    navigate("/signin"); // defer navigation until after state update
-  }, 0);
-};
+
+  const fetchEventList = async () => {
+    try {
+      if (!user || !token) return;
+
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/events/events_by_organizer`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success === true) {
+        setEvents(data.events);
+      } else {
+        toast.error(data.message);
+        logout();
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchEventList();
+  }, [user, token, logout]);
+
+
   return (
     <div className="homepage-container">
-      <h1 className="homepage-title">Welcome to Event Plus, {user || "Guest"}!</h1>
+      <h1 className="homepage-title">
+        Welcome to Event Plus
+      </h1>
 
-      <div className="homepage-buttons">
-        <button onClick={() => navigate("/signin")}>
-          Sign In
-        </button>
+      <div className="homepage-content">
+        <p>Discover and manage your events with ease.</p>
 
-        <button onClick={() => navigate("/signup")}>
-          Sign Up
-        </button>
-            <button className="logoutButton" onClick={logout_user}>
-
-              Logout
-            </button>
+        {user ? (
+          <>
+            <h2>Your Events</h2>
+            <button onClick={() => navigate("/create-event")}>Create Event</button>
+            {events.length === 0 ? (
+              <p>No events found.</p>
+            ) : (
+              <ul>
+                {events.map((event, index) => (
+                  <li key={event.id || index}>
+                    <button
+                      onClick={() => navigate(`/event/${event.id}`)}
+                      style={{ background: "none", border: "none", color: "blue", cursor: "pointer" }}
+                    >
+                      <h3>{event.title}</h3>
+                    </button>
+                    <p>{event.description}</p>
+                    <p>Date: {event.date}</p>
+                    
+                  </li>
+                ))}
+              </ul>
+            )}
+          </>
+        ) : (
+          <p>Please sign in to view your events.</p>
+        )}
       </div>
     </div>
   );

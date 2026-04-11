@@ -31,7 +31,7 @@ export default function SignUp() {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      await response.json();
 
       // TODO: handle success (redirect/login)
       if (response.ok) {
