@@ -9,6 +9,7 @@ import CreateEventForm from "./pages/CreateEvent";
 import Event from "./pages/Event";
 import UpdateEventForm from "./pages/UpdateEvent";
 import JoinRoom from "./pages/Room";
+import JoinRoomLink from "./pages/JoinRoom";
 export default function App() {
   return (
     <>
@@ -21,6 +22,7 @@ export default function App() {
       <Route path="/event/:id" element={<Event />} />
       <Route path="/update-event/:id" element={<UpdateEventForm />} />
       <Route path="/room/:room_id" element={<JoinRoom />} />
+      <Route path="/join-a-room" element={<JoinRoomLink />} />
       <Route path="*" element={<Notfound />} />
     </Routes>
     <Footer />

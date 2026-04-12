@@ -9,7 +9,7 @@ export default function EventDetails() {
   const navigate = useNavigate();
 
   const [event, setEvent] = useState(null);
-  const [room_id, setRoom] = useState(null);
+  // const [room_id, setRoom] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   
