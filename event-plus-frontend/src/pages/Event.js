@@ -9,9 +9,10 @@ export default function EventDetails() {
   const navigate = useNavigate();
 
   const [event, setEvent] = useState(null);
+  const [room_id, setRoom] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
+  
   // ✅ Fetch Event
   useEffect(() => {
     const fetchEvent = async () => {
@@ -72,7 +73,62 @@ export default function EventDetails() {
       toast.error("Error deleting event");
     }
   };
+const startEvent = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/api/events/start_event/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Failed to start event");
+    }
+
+    toast.success("Event started successfully");
+
+    console.log(data);
+
+    // ✅ FIXED: use response directly
+    navigate(`/room/${data.room_id}`);
+
+  } catch (error) {
+    console.error("error", error);
+    toast.error("error starting event");
+  }
+};
+  const endEvent = async () => {
+    try{
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/events/end_event/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to end event");
+      }
+      else{
+        toast.success("Event ended successfully");
+        navigate("/"); // ✅ redirect instead of refetch
+      }
+    }
+    catch(error){
+      console.error("error", error)
+      toast.error("error ending event")
+    }
+
+  };
   if (loading) return <p>Loading...</p>;
   if (error) return <p>❌ {error}</p>;
   if (!event) return <p>No event found</p>;
@@ -104,6 +160,13 @@ export default function EventDetails() {
 
       <button onClick={() => deleteEvent()}>
         Delete
+      </button>
+            <button onClick={() => startEvent()}>
+        start
+      </button>
+
+      <button onClick={() => endEvent()}>
+        end
       </button>
     </div>
   );
