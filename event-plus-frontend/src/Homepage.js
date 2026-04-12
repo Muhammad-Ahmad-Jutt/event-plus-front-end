@@ -49,12 +49,15 @@ export default function Homepage() {
       </h1>
 
       <div className="homepage-content">
-        <p>Discover and manage your events with ease.</p>
+
 
         {user ? (
           <>
-            <h2>Your Events</h2>
-            <button onClick={() => navigate("/create-event")}>Create Event</button>
+            <div className="create-event-container">
+  <button onClick={() => navigate("/create-event")}>
+    Create Event
+  </button>
+</div>
             {events.length === 0 ? (
               <p>No events found.</p>
             ) : (

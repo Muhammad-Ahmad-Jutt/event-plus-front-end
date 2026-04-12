@@ -10,6 +10,7 @@ import Event from "./pages/Event";
 import UpdateEventForm from "./pages/UpdateEvent";
 import JoinRoom from "./pages/Room";
 import JoinRoomLink from "./pages/JoinRoom";
+import "./index.css";
 export default function App() {
   return (
     <>

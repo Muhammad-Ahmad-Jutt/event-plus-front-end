@@ -133,41 +133,53 @@ const startEvent = async () => {
   if (error) return <p>❌ {error}</p>;
   if (!event) return <p>No event found</p>;
 
-  return (
-    <div>
+return (
+  <div className="event-details-container">
+
+    {/* 🔥 ACTION BUTTONS (TOP LEFT) */}
+    <div className="event-actions">
+      <button className="btn start" onClick={startEvent}>
+        Start
+      </button>
+
+      <button className="btn end" onClick={endEvent}>
+        End
+      </button>
+
+      <button className="btn update" onClick={() => navigate(`/update-event/${event.id}`)}>
+        Update
+      </button>
+
+      <button className="btn delete" onClick={deleteEvent}>
+        Delete
+      </button>
+
+
+    </div>
+
+    {/* EVENT CONTENT */}
+    <div className="event-card">
       <h2>{event.title}</h2>
-      <p>{event.description}</p>
+      <p className="desc">{event.description}</p>
 
       <p>
-        Start:{" "}
+        <strong>Start:</strong>{" "}
         {event.event_start_datetime
           ? new Date(event.event_start_datetime).toLocaleString()
           : "N/A"}
       </p>
 
       <p>
-        End:{" "}
+        <strong>End:</strong>{" "}
         {event.event_end_datetime
           ? new Date(event.event_end_datetime).toLocaleString()
           : "N/A"}
       </p>
 
-      <p>Participants: {event.no_of_participants_allowed}</p>
-
-      <button onClick={() => navigate(`/update-event/${event.id}`)}>
-        Update
-      </button>
-
-      <button onClick={() => deleteEvent()}>
-        Delete
-      </button>
-            <button onClick={() => startEvent()}>
-        start
-      </button>
-
-      <button onClick={() => endEvent()}>
-        end
-      </button>
+      <p>
+        <strong>Participants:</strong> {event.no_of_participants_allowed}
+      </p>
     </div>
-  );
+  </div>
+);
 }
