@@ -9,9 +9,10 @@ export default function EventDetails() {
   const navigate = useNavigate();
 
   const [event, setEvent] = useState(null);
+  // const [room_id, setRoom] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
+  
   // ✅ Fetch Event
   useEffect(() => {
     const fetchEvent = async () => {
@@ -72,39 +73,113 @@ export default function EventDetails() {
       toast.error("Error deleting event");
     }
   };
+const startEvent = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/api/events/start_event/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Failed to start event");
+    }
+
+    toast.success("Event started successfully");
+
+    console.log(data);
+
+    // ✅ FIXED: use response directly
+    navigate(`/room/${data.room_id}`);
+
+  } catch (error) {
+    console.error("error", error);
+    toast.error("error starting event");
+  }
+};
+  const endEvent = async () => {
+    try{
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/events/end_event/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to end event");
+      }
+      else{
+        toast.success("Event ended successfully");
+        navigate("/"); // ✅ redirect instead of refetch
+      }
+    }
+    catch(error){
+      console.error("error", error)
+      toast.error("error ending event")
+    }
+
+  };
   if (loading) return <p>Loading...</p>;
   if (error) return <p>❌ {error}</p>;
   if (!event) return <p>No event found</p>;
 
-  return (
-    <div>
+return (
+  <div className="event-details-container">
+
+    {/* 🔥 ACTION BUTTONS (TOP LEFT) */}
+    <div className="event-actions">
+      <button className="btn start" onClick={startEvent}>
+        Start
+      </button>
+
+      <button className="btn end" onClick={endEvent}>
+        End
+      </button>
+
+      <button className="btn update" onClick={() => navigate(`/update-event/${event.id}`)}>
+        Update
+      </button>
+
+      <button className="btn delete" onClick={deleteEvent}>
+        Delete
+      </button>
+
+
+    </div>
+
+    {/* EVENT CONTENT */}
+    <div className="event-card">
       <h2>{event.title}</h2>
-      <p>{event.description}</p>
+      <p className="desc">{event.description}</p>
 
       <p>
-        Start:{" "}
+        <strong>Start:</strong>{" "}
         {event.event_start_datetime
           ? new Date(event.event_start_datetime).toLocaleString()
           : "N/A"}
       </p>
 
       <p>
-        End:{" "}
+        <strong>End:</strong>{" "}
         {event.event_end_datetime
           ? new Date(event.event_end_datetime).toLocaleString()
           : "N/A"}
       </p>
 
-      <p>Participants: {event.no_of_participants_allowed}</p>
-
-      <button onClick={() => navigate(`/update-event/${event.id}`)}>
-        Update
-      </button>
-
-      <button onClick={() => deleteEvent()}>
-        Delete
-      </button>
+      <p>
+        <strong>Participants:</strong> {event.no_of_participants_allowed}
+      </p>
     </div>
-  );
+  </div>
+);
 }

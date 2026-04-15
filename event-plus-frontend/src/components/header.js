@@ -32,6 +32,7 @@ export default function Header() {
             {/* ✅ Show ONLY if logged in */}
             <span>Welcome, {user}</span>
             <button onClick={handleLogout}>Logout</button>
+            <button onClick={() => navigate("/join-a-room")}>Join a room</button>
           </>
         )}
       </div>

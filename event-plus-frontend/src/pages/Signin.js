@@ -34,6 +34,7 @@ export default function SignIn() {
 
       // TODO: handle success (redirect/login)
       if (data.success === true) {
+        
         toast.success(data.message);
         login(data.access_token, data.user);
         navigate("/");
