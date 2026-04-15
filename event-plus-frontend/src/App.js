@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Homepage from "./Homepage";
@@ -15,6 +17,7 @@ export default function App() {
   return (
     <>
     <Header />
+    <ToastContainer position="top-right" autoClose={5000} pauseOnHover />
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/signin" element={<SignIn />} />

@@ -29,6 +29,7 @@ export default function Homepage() {
       if (data.success === true) {
         setEvents(data.events);
       } else {
+        toast.info("Login again to view your events.");
         toast.error(data.message);
         logout();
       }
