@@ -4,3 +4,339 @@
 
 /* =======================
    GLOBAL RESET
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* =======================
+   HEADER CONTAINER
+.header {
+  display: flex;
+  justify-content: space-between; /* logo left, buttons right */
+  align-items: center;
+  padding: 14px 24px;
+  background-color: #111827;
+  color: white;
+}
+
+/* =======================
+   LOGO (LEFT)
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* =======================
+   NAV BUTTONS (RIGHT)
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Welcome text */
+.nav-buttons span {
+  font-size: 14px;
+  color: #e5e7eb;
+}
+
+/* =======================
+   BUTTON BASE STYLE
+.nav-buttons button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+/* =======================
+   BUTTON COLORS
+
+/* Sign In */
+.nav-buttons button:nth-child(1) {
+  background-color: #3b82f6;
+  color: white;
+}
+.nav-buttons button:nth-child(1):hover {
+  background-color: #2563eb;
+}
+
+/* Sign Up */
+.nav-buttons button:nth-child(2) {
+  background-color: #22c55e;
+  color: white;
+}
+.nav-buttons button:nth-child(2):hover {
+  background-color: #16a34a;
+}
+
+/* Logout (when logged in) */
+.nav-buttons button:nth-child(2),
+.nav-buttons button:nth-child(3) {
+  background-color: #ef4444;
+  color: white;
+}
+.nav-buttons button:nth-child(2):hover,
+.nav-buttons button:nth-child(3):hover {
+  background-color: #dc2626;
+}
+
+/* Join Room button */
+.nav-buttons button:last-child {
+  background-color: #8b5cf6;
+  color: white;
+}
+.nav-buttons button:last-child:hover {
+  background-color: #7c3aed;
+}
+
+/* =======================
+   FOOTER
+footer {
+  margin-top: 40px;
+  padding: 15px;
+  text-align: center;
+  background-color: #1f2937;
+  color: white;
+  font-size: 13px;
+}
+/* =======================
+   AUTH CONTAINERS
+.sign-in-container,
+.sign-up-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;       /* horizontal center */
+  justify-content: center;   /* vertical center */
+  height: 80vh;
+}
+
+/* =======================
+   TITLES
+.sign-in-title,
+.sign-up-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #111827;
+}
+
+/* =======================
+   FORM
+.sign-in-form,
+.sign-up-form {
+  display: flex;
+  flex-direction: column;   /* vertical inputs */
+  gap: 15px;
+  width: 300px;
+  padding: 25px;
+  border-radius: 10px;
+  background-color: #f9fafb;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* =======================
+   INPUTS
+.sign-in-form input,
+.sign-up-form input,
+.sign-up-form select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  outline: none;
+}
+
+/* Focus effect */
+.sign-in-form input:focus,
+.sign-up-form input:focus,
+.sign-up-form select:focus {
+  border-color: #3b82f6;
+}
+
+/* =======================
+   BUTTON
+.sign-in-form button,
+.sign-up-form button {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #3b82f6;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.sign-in-form button:hover,
+.sign-up-form button:hover {
+  background-color: #2563eb;
+}
+
+/* =======================
+   HOMEPAGE
+.homepage-container {
+  padding: 30px;
+}
+
+.homepage-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* =======================
+   EVENT LIST
+.homepage-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* EACH EVENT CARD */
+.homepage-content li {
+  background-color: #f3f4f6;   /* light gray */
+  margin-bottom: 15px;
+  padding: 15px 20px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+/* HOVER EFFECT */
+.homepage-content li:hover {
+  background-color: #e0f2fe;  /* light blue */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* TITLE */
+.homepage-content li h3 {
+  margin-bottom: 5px;
+  color: #1f2937;
+}
+
+/* DESCRIPTION */
+.homepage-content li p {
+  margin: 3px 0;
+  color: #4b5563;
+}
+
+/* REMOVE INLINE BUTTON STYLE CLEANLY */
+.homepage-content li button {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+/* Create Event Button Container */
+.create-event-container {
+  display: flex;
+  justify-content: flex-end; /* pushes button to right */
+  margin-bottom: 15px;
+}
+
+/* Button styling (optional upgrade) */
+.create-event-container button {
+  padding: 8px 16px;
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.create-event-container button:hover {
+  background-color: #16a34a;
+}
+/* =======================
+   CONTAINER
+.event-details-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* =======================
+   ACTION BUTTONS (TOP LEFT)
+.event-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* =======================
+   BUTTON BASE
+.btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+/* BUTTON COLORS */
+.btn.update {
+  background-color: #3b82f6;
+}
+.btn.update:hover {
+  background-color: #2563eb;
+}
+
+.btn.delete {
+  background-color: #ef4444;
+}
+.btn.delete:hover {
+  background-color: #dc2626;
+}
+
+.btn.start {
+  background-color: #22c55e;
+}
+.btn.start:hover {
+  background-color: #16a34a;
+}
+
+.btn.end {
+  background-color: #f59e0b;
+}
+.btn.end:hover {
+  background-color: #d97706;
+}
+
+/* =======================
+   EVENT CARD
+.event-card {
+  background-color: #f9fafb;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
+
+/* TITLE */
+.event-card h2 {
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+/* DESCRIPTION */
+.event-card .desc {
+  margin-bottom: 15px;
+  color: #4b5563;
+}
+
+/* TEXT */
+.event-card p {
+  margin: 6px 0;
+  color: #374151;
+}
