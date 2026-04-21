@@ -12,6 +12,11 @@ export default function JoinRoom() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
 
+  //client-side rate limitting
+  const lastSend = useRef(null);
+  const [cooldown, setCooldown] = useState(false);
+  const  MS_COOLDOWN = 3000;
+
   useEffect(() => {
     if (!token || !room_id) return;
 
@@ -47,6 +52,12 @@ export default function JoinRoom() {
 
   // 📤 send message
   const sendMessage = () => {
+
+    // client-side rate-limitting
+    if (lastSend != null && (Date.now() - lastSend.current < MS_COOLDOWN)) {
+      return;
+    }
+
     if (!input.trim()) return;
 
     const payload = {
@@ -55,6 +66,10 @@ export default function JoinRoom() {
     };
 
     socketRef.current.emit("message", payload);
+    // console.log('sent message to websocket service...') //testing line comment this an un-comment above line
+
+    //updating lastSent timestamp
+    lastSend.current = Date.now();
 
     setMessages((prev) => [
       ...prev,
@@ -62,13 +77,17 @@ export default function JoinRoom() {
     ]);
 
     setInput("");
+
+    //sleep send button
+    setCooldown(true);
+    setTimeout(() => setCooldown(false), MS_COOLDOWN); 
   };
 
   const endEvent = () => {};
 
   return (
     <>
-    <script>{`    
+    <style>{`    
     html, body {
       margin: 0;
       padding: 0;
@@ -96,12 +115,6 @@ export default function JoinRoom() {
 
     .header {
       margin-bottom: 16px;
-    }
-
-    .title {
-      font-size: 35px;
-      font-weight: bold;
-      color: #dc2626;
     }
 
     .eventTitle {
@@ -227,13 +240,21 @@ export default function JoinRoom() {
 
     /* Buttons */
     .btnPrimary {
-      background: #3b82f6;
+      background: #00BA46;
       color: white;
       padding: 8px 16px;
       border-radius: 6px;
       border: none;
       cursor: pointer;
+      height: 40px;
     }
+
+    .btnPrimary:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
 
     .btnDanger {
       width: 100%;
@@ -243,17 +264,6 @@ export default function JoinRoom() {
       border-radius: 6px;
       border: none;
       cursor: pointer;
-    }
-
-    .endEvent {
-      width: 100%;
-      background: #ef4444;
-      color: white;
-      padding: 10px;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-      max-width: 120px;
     }
 
     .endSection {
@@ -303,7 +313,7 @@ export default function JoinRoom() {
     .endEvent:hover {
       background-color: #c0392b;
     }
-    `}</script>
+    `}</style>
 
 
     <div className="page" style={{
@@ -366,7 +376,7 @@ export default function JoinRoom() {
       {/* Input */}
       <div className="askBox">
        <h4 className="sectionTitle">Ask Question</h4>
-       <div style={{ display: "flex", gap: 10, marginTop: 10 }}>
+       <div style={{ display: "flex", gap: 10, marginTop: 10, alignItems: "center" }}>
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -374,7 +384,7 @@ export default function JoinRoom() {
           style={{ flex: 1, height: 50, padding: 10, borderRadius: 10 }}
         />
 
-        <button onClick={sendMessage} className="btnPrimary">
+        <button onClick={sendMessage} className="btnPrimary" disabled={cooldown}>
           Send
         </button>
       </div>

@@ -37,3 +37,26 @@ export default function App() {
   );
 }
 
+/*
+export default function App() {
+  return (
+    <>
+    <Header />
+    <ToastContainer position="top-right" autoClose={5000} pauseOnHover />
+    <Routes>
+      <Route path="/" element={<Homepage />} />
+      <Route path="/signin" element={<SignIn />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/create-event" element={<CreateEventForm />} />
+      <Route path="/event/:id" element={<Event />} />
+      <Route path="/update-event/:id" element={<UpdateEventForm />} />
+      <Route path="/room/:room_id" element={<JoinRoom />} />
+      <Route path="/join-a-room" element={<JoinRoomLink />} />
+      <Route path="*" element={<Notfound />} />
+    </Routes>
+    <Footer />
+    </>
+  );
+}
+*/
+
