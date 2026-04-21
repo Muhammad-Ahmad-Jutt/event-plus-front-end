@@ -66,7 +66,7 @@ export default function JoinRoom() {
     };
 
     socketRef.current.emit("message", payload);
-    // console.log('sent message to websocket service...') //testing line comment this an un-comment above line
+    //console.log('sent message to websocket service...') //testing line comment this an un-comment above line
 
     //updating lastSent timestamp
     lastSend.current = Date.now();
@@ -187,6 +187,7 @@ export default function JoinRoom() {
       padding: 12px;
       border-radius: 8px;
       width: 100%;
+      margin-bottom: 10px;
     }
 
     .messageHeader {
@@ -366,7 +367,7 @@ export default function JoinRoom() {
         }}
       >
         {messages.map((msg, i) => (
-          <div key={i}>
+          <div key={i} className="messageBox">
             <strong>{msg.user || "user"}:</strong> {msg.message}
           </div>
         ))}
