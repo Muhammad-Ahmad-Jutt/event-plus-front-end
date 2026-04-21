@@ -13,7 +13,9 @@ import UpdateEventForm from "./pages/UpdateEvent";
 import JoinRoom from "./pages/Room";
 import JoinRoomLink from "./pages/JoinRoom";
 import "./index.css";
-//confirming changes
+import LiveEvent from "./pages/LiveEvent";
+
+
 export default function App() {
   return (
     <>
@@ -34,4 +36,4 @@ export default function App() {
     </>
   );
 }
-*/
+
