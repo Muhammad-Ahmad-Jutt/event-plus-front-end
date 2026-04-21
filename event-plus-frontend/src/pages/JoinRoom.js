@@ -36,6 +36,7 @@ const join_room_function = (room_id) => {
             border-color: black;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             padding: 24px;
+            margin-top: 20px;
             }
 
             .btnPrimary {
