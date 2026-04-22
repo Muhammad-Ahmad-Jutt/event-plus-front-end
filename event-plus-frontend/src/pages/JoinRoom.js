@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export default function JoinRoomLink() {
 const navigate = useNavigate()
 const join_room_function = (room_id) => {
-    navigate(`${process.env.REACT_APP_API_URL}/room/${room_id}`)
+    navigate(`/room/${room_id}`)
 }
     return (
         <div>

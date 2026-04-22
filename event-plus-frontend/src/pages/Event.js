@@ -35,7 +35,7 @@ export default function EventDetails() {
         if (!response.ok) {
           throw new Error(data.message || "Failed to fetch event");
         }
-
+        console.log("Fetched event data:", data);
         setEvent(data.event);
       } catch (err) {
         console.error(err);
@@ -139,19 +139,18 @@ return (
 
     {/* 🔥 ACTION BUTTONS (TOP LEFT) */}
     <div className="event-actions">
-      <button className="btn start" onClick={startEvent}>
-        Start
-      </button>
-
+        <button className="btn start" onClick={startEvent}>
+          Start
+        </button>
+        
       <button className="btn end" onClick={endEvent}>
         End
       </button>
+        <button className="btn update" onClick={() => navigate(`/update-event/${event.id}`)}>
+          Update
+        </button>
 
-      <button className="btn update" onClick={() => navigate(`/update-event/${event.id}`)}>
-        Update
-      </button>
-
-      <button className="btn delete" onClick={deleteEvent}>
+              <button className="btn delete" onClick={deleteEvent}>
         Delete
       </button>
 
