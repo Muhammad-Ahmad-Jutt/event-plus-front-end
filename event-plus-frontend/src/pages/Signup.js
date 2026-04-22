@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import bg from "../images/event-plus-bg.png";
+
 export default function SignUp() {
   const [formData, setFormData] = useState({
     email: "",
@@ -43,8 +45,31 @@ export default function SignUp() {
   };
 
   return (
+    <>
+    <style>{`
+      .pageImg {
+            padding: 24px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+      }
+    `}</style>
+    <div className="pageImg"
+        style={{
+          backgroundImage: `url(${bg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          minHeight: "calc(100vh - 60px)",
+          display: "flex",
+          justifyContent: "center",
+          fontFamily: "Arial, sans-serif",
+          marginTop: "-20px",
+          marginBottom: "-40px",
+        }}>
     <div className="sign-up-container">
-      <h1 className="sign-up-title">Sign Up</h1>
+      <h1 className="floatingTitle">Sign Up</h1>
 
       <form onSubmit={handleSubmit} className="sign-up-form">
         <input
@@ -92,5 +117,7 @@ export default function SignUp() {
         <button type="submit">Sign Up</button>
       </form>
     </div>
+    </div>
+    </>
   );
 }
