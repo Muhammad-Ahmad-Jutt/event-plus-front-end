@@ -18,11 +18,11 @@ body {
 .header {
   display: flex;
   justify-content: space-between; /* logo left, buttons right */
-  /* align-items: center;
+  align-items: center;
   padding: 14px 24px;
   background-color: #111827;
   color: white;
-} */
+}
 
 /* =======================
    LOGO (LEFT)
@@ -121,9 +121,9 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;       /* horizontal center */
-  /* justify-content: center;   
+  justify-content: center;   /* vertical center */
   height: 80vh;
-} */
+}
 
 /* =======================
    TITLES
@@ -142,13 +142,13 @@ footer {
 .sign-up-form {
   display: flex;
   flex-direction: column;   /* vertical inputs */
-  /* gap: 15px;
+  gap: 15px;
   width: 300px;
   padding: 25px;
   border-radius: 10px;
   background-color: #f9fafb;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-} */
+}
 
 /* =======================
    INPUTS
