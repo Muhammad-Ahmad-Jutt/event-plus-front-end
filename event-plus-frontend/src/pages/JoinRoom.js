@@ -2,11 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function JoinRoomLink() {
-const [room_id, setRoom_id] = useState()
 const navigate = useNavigate()
 const join_room_function = (room_id) => {
-    setRoom_id(room_id) // ✅ hardcoded for now, replace with actual input value
-    navigate(`{process.env.REACT_APP_API_URL}/room/${room_id}`)
+    navigate(`${process.env.REACT_APP_API_URL}/room/${room_id}`)
 }
     return (
         <div>
