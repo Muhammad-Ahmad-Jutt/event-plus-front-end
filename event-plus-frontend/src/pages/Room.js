@@ -95,7 +95,7 @@ export default function JoinRoom() {
     }
 
 
-    .page {
+    .pageImg {
       padding: 24px;
       min-height: 100vh;
       display: flex;
@@ -113,7 +113,7 @@ export default function JoinRoom() {
     }
 
 
-    .header {
+    .headerBox {
       margin-bottom: 16px;
     }
 
@@ -316,33 +316,29 @@ export default function JoinRoom() {
     }
     `}</style>
 
-
-    <div className="page" style={{
-        padding: "24px",
-        backgroundImage: `url(${bg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        minHeight: "100dvh",
-        display: "flex",
-        justifyContent: "center",
-        fontFamily: "Arial, sans-serif",
+    <div className="pageImg"
+        style={{
+          backgroundImage: `url(${bg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          minHeight: "calc(100vh - 60px)",
+          display: "flex",
+          justifyContent: "center",
+          fontFamily: "Arial, sans-serif",
+          marginTop: "-20px",
+          marginBottom: "-40px",
         }}>
+
 
     <div className="container">
 
       {/* Header */}
-        <div className="header">
+        <div className="headerBox">
             <div className="topheaderview">
               <h2 className="title">Live Event</h2>
               <div className="statusview">
-                {/*<span className="live-dot"></span>*/}
                 <span className="status">Active</span>
-                {/*
-                <button onClick={endEvent} className="endEvent">
-                    End Event
-                </button>
-                */}
               </div>
             </div>
       </div>

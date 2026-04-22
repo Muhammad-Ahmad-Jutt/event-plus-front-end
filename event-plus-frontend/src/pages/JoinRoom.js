@@ -16,7 +16,7 @@ const join_room_function = (room_id) => {
             overflow-x: hidden;
             }
 
-            .page {
+            .pageImg {
             padding: 24px;
             min-height: 100vh;
             display: flex;
@@ -71,7 +71,7 @@ const join_room_function = (room_id) => {
             color: red;
             }
 
-            .header {
+            .headerBox {
              margin-bottom: 25px;
             }
 
@@ -87,20 +87,22 @@ const join_room_function = (room_id) => {
 
         `}</style>
 
-        <div className="page" style={{
-        padding: "24px",
-        backgroundImage: `url(${bg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        minHeight: "100dvh",
-        display: "flex",
-        justifyContent: "center",
-        fontFamily: "Arial, sans-serif",
+        <div className="pageImg"
+        style={{
+          backgroundImage: `url(${bg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          minHeight: "calc(100vh - 60px)",
+          display: "flex",
+          justifyContent: "center",
+          fontFamily: "Arial, sans-serif",
+          marginTop: "-20px",
+          marginBottom: "-40px",
         }}>
         <div className="container">
            
-        <div className="header">
+        <div className="headerBox">
             <div className="topheaderview">
               <h1 className="sectionTitle">Join Room</h1>
             </div>
