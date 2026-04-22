@@ -2,6 +2,8 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
+import bg from "../images/event-plus-bg.png";
+
 export default function SignIn() {
   const [formData, setFormData] = useState({
     email: "",
@@ -50,8 +52,31 @@ export default function SignIn() {
     //backend api logic
 
   return (
+    <>
+    <style>{`
+      .pageImg {
+            padding: 24px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+      }
+    `}</style>
+    <div className="pageImg"
+        style={{
+          backgroundImage: `url(${bg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          minHeight: "calc(100vh - 60px)",
+          display: "flex",
+          justifyContent: "center",
+          fontFamily: "Arial, sans-serif",
+          marginTop: "-20px",
+          marginBottom: "-40px",
+        }}>
     <div className="sign-in-container">
-      <h1 className="sign-in-title">Sign In</h1>
+      <h1 className="floatingTitle">Sign In</h1>
 
       <form onSubmit={handleSubmit} className="sign-in-form">
         <input
@@ -75,5 +100,7 @@ export default function SignIn() {
         <button type="submit">Sign In</button>
       </form>
     </div>
+    </div>
+    </>
   );
 }

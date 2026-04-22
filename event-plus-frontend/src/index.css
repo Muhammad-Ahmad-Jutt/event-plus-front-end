@@ -135,6 +135,12 @@ footer {
   color: #111827;
 }
 
+.floatingTitle{
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
 /* =======================
    FORM
 ======================= */
