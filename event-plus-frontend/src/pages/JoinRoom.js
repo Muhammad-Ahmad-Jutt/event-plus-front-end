@@ -3,11 +3,9 @@ import { useNavigate } from "react-router-dom";
 import bg from "../images/event-plus-bg.png";
 
 export default function JoinRoomLink() {
-const [room_id, setRoom_id] = useState()
 const navigate = useNavigate()
 const join_room_function = (room_id) => {
-    setRoom_id(room_id) // ✅ hardcoded for now, replace with actual input value
-    navigate(`{process.env.REACT_APP_API_URL}/room/${room_id}`)
+    navigate(`/room/${room_id}`)
 }
     return (
         <>

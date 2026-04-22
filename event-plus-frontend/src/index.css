@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* =======================
-   GLOBAL RESET
 * {
   margin: 0;
   padding: 0;
@@ -16,6 +14,7 @@ body {
 
 /* =======================
    HEADER CONTAINER
+======================= */
 .header {
   display: flex;
   justify-content: space-between; /* logo left, buttons right */
@@ -27,6 +26,7 @@ body {
 
 /* =======================
    LOGO (LEFT)
+======================= */
 .logo {
   font-size: 22px;
   font-weight: bold;
@@ -35,6 +35,7 @@ body {
 
 /* =======================
    NAV BUTTONS (RIGHT)
+======================= */
 .nav-buttons {
   display: flex;
   align-items: center;
@@ -49,6 +50,7 @@ body {
 
 /* =======================
    BUTTON BASE STYLE
+======================= */
 .nav-buttons button {
   padding: 8px 14px;
   border: none;
@@ -60,6 +62,7 @@ body {
 
 /* =======================
    BUTTON COLORS
+======================= */
 
 /* Sign In */
 .nav-buttons button:nth-child(1) {
@@ -101,6 +104,7 @@ body {
 
 /* =======================
    FOOTER
+======================= */
 footer {
   margin-top: 40px;
   padding: 15px;
@@ -111,6 +115,7 @@ footer {
 }
 /* =======================
    AUTH CONTAINERS
+======================= */
 .sign-in-container,
 .sign-up-container {
   display: flex;
@@ -122,6 +127,7 @@ footer {
 
 /* =======================
    TITLES
+======================= */
 .sign-in-title,
 .sign-up-title {
   font-size: 28px;
@@ -131,6 +137,7 @@ footer {
 
 /* =======================
    FORM
+======================= */
 .sign-in-form,
 .sign-up-form {
   display: flex;
@@ -145,6 +152,7 @@ footer {
 
 /* =======================
    INPUTS
+======================= */
 .sign-in-form input,
 .sign-up-form input,
 .sign-up-form select {
@@ -164,6 +172,7 @@ footer {
 
 /* =======================
    BUTTON
+======================= */
 .sign-in-form button,
 .sign-up-form button {
   padding: 10px;
@@ -183,6 +192,7 @@ footer {
 
 /* =======================
    HOMEPAGE
+======================= */
 .homepage-container {
   padding: 30px;
 }
@@ -194,6 +204,7 @@ footer {
 
 /* =======================
    EVENT LIST
+======================= */
 .homepage-content ul {
   list-style: none;
   padding: 0;
@@ -259,6 +270,7 @@ footer {
 }
 /* =======================
    CONTAINER
+======================= */
 .event-details-container {
   max-width: 700px;
   margin: 40px auto;
@@ -267,6 +279,7 @@ footer {
 
 /* =======================
    ACTION BUTTONS (TOP LEFT)
+======================= */
 .event-actions {
   display: flex;
   gap: 10px;
@@ -275,6 +288,7 @@ footer {
 
 /* =======================
    BUTTON BASE
+======================= */
 .btn {
   padding: 8px 14px;
   border: none;
@@ -316,6 +330,7 @@ footer {
 
 /* =======================
    EVENT CARD
+======================= */
 .event-card {
   background-color: #f9fafb;
   padding: 25px;
