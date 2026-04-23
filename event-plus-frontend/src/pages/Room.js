@@ -110,6 +110,8 @@ export default function JoinRoom() {
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       padding: 24px;
+      border-width: 2px;
+      border-color: black;
     }
 
 
