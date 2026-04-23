@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
+import bg from "../images/event-plus-bg.png";
 
 export default function EventDetails() {
   const { id } = useParams();
@@ -12,7 +13,8 @@ export default function EventDetails() {
   // const [room_id, setRoom] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  
+
+
   // ✅ Fetch Event
   useEffect(() => {
     const fetchEvent = async () => {
@@ -73,6 +75,7 @@ export default function EventDetails() {
       toast.error("Error deleting event");
     }
   };
+
 const startEvent = async () => {
   try {
     const response = await fetch(
@@ -103,6 +106,7 @@ const startEvent = async () => {
     toast.error("error starting event");
   }
 };
+
   const endEvent = async () => {
     try{
       const response = await fetch(
@@ -130,12 +134,44 @@ const startEvent = async () => {
     }
 
   };
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>❌ {error}</p>;
-  if (!event) return <p>No event found</p>;
+  
+
+  if (loading) return <div className="loading-wrapper" style={{ marginTop: "-20px", marginBottom: "-40px"}}><p className="gradient-text-loading">Loading...</p></div>;
+  if (error) return <div className="loading-wrapper" style={{ marginTop: "-20px", marginBottom: "-40px"}}><p className="gradient-text-loading">❌ {error}</p></div>;
+  if (!event) return <div className="loading-wrapper" style={{ marginTop: "-20px", marginBottom: "-40px"}}><p className="gradient-text-loading">No event found</p></div>;
 
 return (
-  <div className="event-details-container">
+  <>
+  <style>{`
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .pageImg {
+      padding: 24px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+    }
+  `}</style>
+   <div className="pageImg"
+        style={{
+          backgroundImage: `url(${bg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          minHeight: "calc(100vh - 60px)",
+          display: "flex",
+          justifyContent: "center",
+          fontFamily: "Arial, sans-serif",
+          marginTop: "-20px",
+          marginBottom: "-40px",
+        }}>
+          
+    <div className="event-details-container">
 
     {/* 🔥 ACTION BUTTONS (TOP LEFT) */}
     <div className="event-actions">
@@ -181,5 +217,7 @@ return (
       </p>
     </div>
   </div>
+  </div>
+  </>
 );
 }
