@@ -22,7 +22,7 @@ export default function App() {
     <Header />
     <ToastContainer position="top-right" autoClose={5000} pauseOnHover />
     <Routes>
-      <Route path="/" element={<Homepage />} />
+      <Route path="/" element={<CreateEventForm />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/create-event" element={<CreateEventForm />} />
