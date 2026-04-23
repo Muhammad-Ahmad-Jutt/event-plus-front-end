@@ -141,6 +141,14 @@ footer {
   color: #ffffff;
 }
 
+.warningLabel{
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #000000;
+  text-align: center;
+  margin-top: 10px;
+}
+
 .gradient-text-title {
   font-size: 40px;
   font-weight: 700;

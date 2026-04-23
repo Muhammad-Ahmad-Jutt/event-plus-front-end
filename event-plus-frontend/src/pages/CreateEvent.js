@@ -3,11 +3,7 @@ import { AuthContext } from "../context/AuthContext"; // ✅ fixed path
 import bg from "../images/event-plus-bg.png";
 
 export default function CreateEventForm() {
-  //const { token } = useContext(AuthContext); // ✅ works now
-  /*
-  ========== TESTING LINE BELOW (LINE 9). COMMENT THIS LINE AND UNCOMMENT ABOVE LINE 5 =========
-  */
-  const token = 'mock-token-123' // comment this testing line
+  const { token } = useContext(AuthContext); // ✅ works now
 
   const [formData, setFormData] = useState({
     title: "",
@@ -35,6 +31,7 @@ export default function CreateEventForm() {
       [name]: value,
     }));
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -88,6 +85,7 @@ export default function CreateEventForm() {
       setLoading(false);
     }
   };
+  
 
   return (
     <>
@@ -110,23 +108,13 @@ export default function CreateEventForm() {
             background: #FAF9F6;
             width: 100%;
             max-width: 940px;
-            height: 400px;
+            height: 630px;
             border-radius: 12px;
             border-width: 2px;
             border-color: black;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             padding: 24px;
             margin-top: 20px;
-            }
-
-            .btnPrimary {
-            background: #00BA46;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            height: 40px;
             }
 
             .title {
@@ -166,6 +154,58 @@ export default function CreateEventForm() {
             border-radius: 10px;
             padding: 10px;
             }
+
+          .eventForm {
+            display: flex;
+            flex-direction: column;
+            gap: 16px; /* spacing between fields */
+            padding: 24px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+          }
+
+          .eventForm input,
+          .eventForm textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+          }
+
+          .eventForm input:focus,
+          .eventForm textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+          }
+
+          .eventForm textarea {
+            min-height: 100px;
+            resize: vertical;
+          }
+
+          .btnPrimary {
+            background: #00BA46;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            height: 40px;
+          }
+
+          .btnPrimary:hover {
+            background: #006400;
+          }
+
+          .btnPrimary:disabled {
+            background: #aaa;
+            cursor: not-allowed;
+          }
+
     `}</style>
     <div className="pageImg"
         style={{
@@ -181,15 +221,15 @@ export default function CreateEventForm() {
           marginBottom: "-40px",
         }}>
     <div className="container">  
-      <h2>Create Event</h2>
+      {/*<h2>Create Event</h2>*/}
 
-      {/*<div className="headerBox">
-            <div className="topheaderview">
-              <h1 className="sectionTitle">Create Event</h1>
-            </div>
-        </div>*/}
+      <div className="headerBox">
+          <div className="topheaderview">
+            <h1 className="sectionTitle">Create Event</h1>
+          </div>
+      </div>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="eventForm">
         <input
           type="text"
           name="title"
@@ -232,12 +272,12 @@ export default function CreateEventForm() {
           required
         />
 
-        <button type="submit" disabled={loading || !token}>
+        <button type="submit" disabled={loading || !token} className="btnPrimary">
           {loading ? "Creating..." : "Create Event"}
         </button>
       </form>
 
-      {message && <p>{message}</p>}
+      {message && <p className="warningLabel">{message}</p>}
     </div>
     </div>
     </>
