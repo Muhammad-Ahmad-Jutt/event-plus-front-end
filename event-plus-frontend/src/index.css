@@ -188,6 +188,40 @@ footer {
   color: transparent;
 }
 
+.gradient-text-loading {
+  font-size: 25px;
+  font-weight: 50;
+  position: relative;
+  z-index: 2;
+
+  background: linear-gradient(
+    90deg,
+    #FFF700,
+    #00FFFF,
+    #FFFFFF
+    
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  background-clip: text;
+  color: transparent;
+  margin-left: 20px;
+  margin-top: 50px;
+}
+
+.loading-wrapper {
+  background-image: url("./images/event-plus-bg.png");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 /* =======================
    FORM
 ======================= */
