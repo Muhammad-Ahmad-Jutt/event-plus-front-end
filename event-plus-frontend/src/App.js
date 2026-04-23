@@ -14,8 +14,59 @@ import JoinRoom from "./pages/Room";
 import JoinRoomLink from "./pages/JoinRoom";
 import "./index.css";
 import LiveEvent from "./pages/LiveEvent";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
+export default function App() {
+  return (
+    <>
+    <Header />
+    <ToastContainer position="top-right" autoClose={5000} pauseOnHover />
+    <Routes>
+      <Route path="/" element={<Homepage />} />
+      <Route path="/signin" element={<SignIn />} />
+      <Route path="/signup" element={<SignUp />} />
+      
+      <Route path="/create-event" element={
+         <ProtectedRoute>
+          <CreateEventForm />
+         </ProtectedRoute> 
+      }/>
+
+      <Route path="/event/:id" element={
+        <ProtectedRoute>
+          <Event />
+        </ProtectedRoute>
+      }/>
+
+      <Route path="/update-event/:id" element={
+        <ProtectedRoute>
+          <UpdateEventForm />
+        </ProtectedRoute>
+      }/>
+
+      <Route path="/room/:room_id" element={
+        <ProtectedRoute>
+          <JoinRoom />
+        </ProtectedRoute>
+      }/>
+
+      <Route path="/join-a-room" element={
+        <ProtectedRoute>
+          <JoinRoomLink />
+        </ProtectedRoute>
+      }/>
+
+      <Route path="*" element={<Notfound />} />
+
+    </Routes>
+    <Footer />
+    </>
+  );
+}
+
+
+/*
 export default function App() {
   return (
     <>
@@ -36,4 +87,4 @@ export default function App() {
     </>
   );
 }
-
+*/
