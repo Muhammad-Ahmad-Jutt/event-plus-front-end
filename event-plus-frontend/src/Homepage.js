@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 import { toast } from "react-toastify";
+import bg from "./images/event-plus-bg.png";
 
 export default function Homepage() {
   const { user, token, logout } = useContext(AuthContext);
@@ -44,9 +45,33 @@ export default function Homepage() {
 
 
   return (
-    <div className="homepage-container">
-      <h1 className="homepage-title">
-        Welcome to Event Plus
+    <>
+    <style>{`
+      .pageImg {
+            padding: 24px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+      }
+    `}</style>
+
+    
+    <div className="pageImg"
+        style={{
+          backgroundImage: `url(${bg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          minHeight: "calc(100vh - 60px)",
+          fontFamily: "Arial, sans-serif",
+          marginTop: "-20px",
+          marginBottom: "-40px",
+        }}>
+
+    <div className="homepage-container" style={{ width: "100%" }}>
+      <h1 className="gradient-text-title">
+        Welcome to Event Plus.
       </h1>
 
       <div className="homepage-content">
@@ -80,9 +105,11 @@ export default function Homepage() {
             )}
           </>
         ) : (
-          <p>Please sign in to view your events.</p>
+          <p className="gradient-text-subtitle">Please sign in to view your events.</p>
         )}
       </div>
     </div>
+    </div>
+    </>
   );
 }
