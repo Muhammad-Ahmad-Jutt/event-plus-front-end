@@ -21,6 +21,7 @@ export default function UpdateEventForm() {
 
   // ✅ Fetch existing event data
   useEffect(() => {
+    
     const fetchEvent = async () => {
       try {
         const response = await fetch(
@@ -55,7 +56,7 @@ export default function UpdateEventForm() {
       } catch (err) {
         setMessage(`❌ ${err.message}`);
       }
-    };
+    }; 
 
     if (id && token) fetchEvent();
   }, [id, token]);
