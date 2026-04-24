@@ -17,10 +17,16 @@ export default function SignIn() {
       [e.target.name]: e.target.value,
     });
   };
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if(isSubmitting) {
+      return;
+    }
+
+    setIsSubmitting(true);
     
     try {
         // backend logic
@@ -47,6 +53,10 @@ export default function SignIn() {
 
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setTimeout(() => {
+        setIsSubmitting(false);
+      }, 2000);
     }
   }
     //backend api logic
@@ -54,13 +64,40 @@ export default function SignIn() {
   return (
     <>
     <style>{`
-      .pageImg {
-            padding: 24px;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            font-family: Arial, sans-serif;
-      }
+    .pageImg {
+      padding: 24px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .btnPrimary {
+      background: #3b82f6;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      height: 40px;
+    }
+
+    .btnPrimary:hover {
+      background: #ccc;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      height: 40px;
+    }
+
+    .btnPrimary:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+      
     `}</style>
     <div className="pageImg"
         style={{
@@ -97,7 +134,7 @@ export default function SignIn() {
           required
         />
 
-        <button type="submit">Sign In</button>
+        <button type="submit" className="btnPrimary" disabled={isSubmitting}>Sign In</button>
       </form>
     </div>
     </div>
