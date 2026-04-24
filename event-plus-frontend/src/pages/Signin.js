@@ -27,7 +27,6 @@ export default function SignIn() {
     }
 
     setIsSubmitting(true);
-    console.log('setIsSubmitting - true');
     
     try {
         // backend logic
@@ -57,7 +56,6 @@ export default function SignIn() {
     } finally {
       setTimeout(() => {
         setIsSubmitting(false);
-        console.log('setIsSubmitting - false');
       }, 2000);
     }
   }

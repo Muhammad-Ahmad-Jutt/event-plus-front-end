@@ -12,6 +12,7 @@ export default function SignUp() {
     dob: "",
   });
   const navigate = useNavigate()
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -22,6 +23,13 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if(isSubmitting) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    console.log('set true');
 
     try {
         // backend logic
@@ -41,6 +49,11 @@ export default function SignUp() {
       }
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setTimeout(() => {
+        setIsSubmitting(false);
+        console.log('set false');
+      }, 2000);
     }
   };
 
@@ -48,11 +61,37 @@ export default function SignUp() {
     <>
     <style>{`
       .pageImg {
-            padding: 24px;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            font-family: Arial, sans-serif;
+        padding: 24px;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        font-family: Arial, sans-serif;
+      }
+        
+      .btnPrimary {
+        background: #3b82f6;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        height: 40px;
+      }
+
+      .btnPrimary:hover {
+        background: #ccc;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        height: 40px;
+      }
+
+      .btnPrimary:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        opacity: 0.7;
       }
     `}</style>
     <div className="pageImg"
@@ -114,7 +153,7 @@ export default function SignUp() {
           onChange={handleChange}
         />
 
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="btnPrimary" disabled={isSubmitting}>Sign Up</button>
       </form>
     </div>
     </div>
