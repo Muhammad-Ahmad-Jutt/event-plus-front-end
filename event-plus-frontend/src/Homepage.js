@@ -10,6 +10,24 @@ export default function Homepage() {
   const [events, setEvents] = useState([]);
   const navigate = useNavigate();
 
+  const formatEventDate = (event) => {
+    const eventDate = event.event_start_datetime || event.date;
+
+    if (!eventDate) {
+      return "N/A";
+    }
+
+    return new Date(eventDate).toLocaleString("en-GB", {
+      weekday: "short",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+  };
+
   const fetchEventList = async () => {
     try {
       if (!user || !token) return;
@@ -97,7 +115,7 @@ export default function Homepage() {
                       <h3>{event.title}</h3>
                     </button>
                     <p>{event.description}</p>
-                    <p>Date: {event.date}</p>
+                    <p>Date: {formatEventDate(event)}</p>
                     
                   </li>
                 ))}
