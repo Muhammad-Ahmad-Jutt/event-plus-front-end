@@ -52,17 +52,18 @@ export default function JoinRoom() {
 
   // 📤 send message
   const sendMessage = () => {
+    const trimmedInput = input.trim();
 
     // client-side rate-limitting
-    if (lastSend != null && (Date.now() - lastSend.current < MS_COOLDOWN)) {
+    if (lastSend.current != null && (Date.now() - lastSend.current < MS_COOLDOWN)) {
       return;
     }
 
-    if (!input.trim()) return;
+    if (!trimmedInput || !socketRef.current) return;
 
     const payload = {
       room_id,
-      message: input,
+      message: trimmedInput,
     };
 
     socketRef.current.emit("message", payload);
@@ -70,11 +71,6 @@ export default function JoinRoom() {
 
     //updating lastSent timestamp
     lastSend.current = Date.now();
-
-    setMessages((prev) => [
-      ...prev,
-      { message: input, user: "me" },
-    ]);
 
     setInput("");
 
