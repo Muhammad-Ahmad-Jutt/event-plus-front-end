@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext"; // ✅ fixed path
+import { toast } from "react-toastify";
 import bg from "../images/event-plus-bg.png";
 
 export default function CreateEventForm() {
   const { token } = useContext(AuthContext); // ✅ works now
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     title: "",
@@ -69,6 +72,7 @@ export default function CreateEventForm() {
       }
 
       setMessage("✅ Event created successfully!");
+      toast.success("Event created successfully!");
 
       // reset form
       setFormData({
@@ -79,8 +83,11 @@ export default function CreateEventForm() {
         no_of_participants_allowed: "",
       });
 
+      navigate("/");
+
     } catch (error) {
       setMessage(`❌ ${error.message}`);
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
