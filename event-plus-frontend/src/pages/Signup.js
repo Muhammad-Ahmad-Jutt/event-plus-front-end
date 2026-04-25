@@ -45,7 +45,7 @@ export default function SignUp() {
 
       // TODO: handle success (redirect/login)
       if (response.ok) {
-        navigate("/sign-in");
+        navigate("/signin");
       }
     } catch (error) {
       console.error("Error:", error);
