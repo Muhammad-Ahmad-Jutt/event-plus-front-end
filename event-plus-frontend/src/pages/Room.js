@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { io } from "socket.io-client";
 import bg from "../images/event-plus-bg.png";
@@ -7,10 +7,12 @@ import bg from "../images/event-plus-bg.png";
 export default function JoinRoom() {
   const { room_id } = useParams();
   const { token } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const socketRef = useRef(null);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const [connectionError, setConnectionError] = useState(false);
 
   //client-side rate limitting
   const lastSend = useRef(null);
@@ -32,17 +34,23 @@ export default function JoinRoom() {
     socketRef.current = socket;
 
     socket.on("connect", () => {
-      console.log("✅ connected:", socket.id);
+      setConnectionError(false);
     });
 
-    // 📩 receive messages
+    socket.on("connect_error", (error) => {
+      setConnectionError(true);
+      // Redirect to home immediately on connection failure
+      navigate("/");
+    });
+
     socket.on("message", (data) => {
-      console.log("📩 received:", data);
       setMessages((prev) => [...prev, data]);
     });
 
     socket.on("disconnect", () => {
       console.log("🔌 disconnected");
+      // Redirect to home immediately on disconnect
+      navigate("/");
     });
 
     return () => {
@@ -50,7 +58,6 @@ export default function JoinRoom() {
     };
   }, [room_id, token]);
 
-  // 📤 send message
   const sendMessage = () => {
     const trimmedInput = input.trim();
 
