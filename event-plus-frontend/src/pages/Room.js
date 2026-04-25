@@ -193,6 +193,7 @@ export default function JoinRoom() {
       border-radius: 8px;
       width: 100%;
       margin-bottom: 10px;
+      color: #000000
     }
 
     .messageHeader {
