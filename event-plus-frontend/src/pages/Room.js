@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { io } from "socket.io-client";
 import bg from "../images/event-plus-bg.png";
+import { toast } from "react-toastify";
 
 export default function JoinRoom() {
   const { room_id } = useParams();
@@ -45,6 +46,12 @@ export default function JoinRoom() {
 
     socket.on("message", (data) => {
       setMessages((prev) => [...prev, data]);
+    });
+
+    socket.on("event_ended", (data) => {
+      // Redirect to home immediately on event ended.
+      toast.info("The event has ended");
+      navigate("/");
     });
 
     socket.on("disconnect", () => {
