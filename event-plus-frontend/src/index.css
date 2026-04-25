@@ -216,6 +216,59 @@ footer {
   margin-top: 50px;
 }
 
+.gradient-text-homepage-message {
+  font-size: 22px;
+  font-weight: 50;
+  position: relative;
+  z-index: 2;
+
+  background: linear-gradient(
+    90deg,
+    #FFF700,
+    #00FFFF,
+    #FFFFFF
+    
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  background-clip: text;
+  color: transparent;
+  margin-left: 20px;
+  margin-top: 50px;
+}
+
+.gradient-text-homepage-subtitle {
+  font-size: 19px;
+  font-weight: 50;
+  position: relative;
+  z-index: 2;
+
+  background: linear-gradient(
+    90deg,
+    #07F7EB,
+    #8B07F7,
+    #FFFFFF
+    
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  background-clip: text;
+  color: transparent;
+  margin-left: 20px;
+  margin-top: 50px;
+}
+
+.messageBox {
+  background: rgba(0, 0, 0, 0.85); /* slight transparency */
+  backdrop-filter: blur(6px);      /* modern glass effect */
+  color: white;
+}
+
+
 .loading-wrapper {
   background-image: url("./images/event-plus-bg.png");
   background-size: cover;
@@ -360,6 +413,7 @@ footer {
 .create-event-container button:hover {
   background-color: #16a34a;
 }
+
 /* =======================
    CONTAINER
 ======================= */

@@ -103,7 +103,10 @@ export default function Homepage() {
   </button>
 </div>
             {events.length === 0 ? (
-              <p>No events found.</p>
+              
+                <h2 className="gradient-text-homepage-subtitle">No Events Found. Create an event to view it here.</h2>
+                
+             
             ) : (
               <ul>
                 {events.map((event, index) => (
